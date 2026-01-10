@@ -30,6 +30,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,17 +60,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Modeles\Classes\Administrateur.cs" />
-    <Compile Include="Modeles\Classes\DossierMedical.cs" />
-    <Compile Include="Modeles\Classes\Medecin.cs" />
-    <Compile Include="Modeles\Classes\Message.cs" />
-    <Compile Include="Modeles\Classes\Patient.cs" />
-    <Compile Include="Modeles\Classes\RendezVous.cs" />
-    <Compile Include="Modeles\Classes\ResponsablePatient.cs" />
-    <Compile Include="Modeles\Interfaces\IMessageService.cs" />
-    <Compile Include="Modeles\Interfaces\IRendezVousService.cs" />
-    <Compile Include="Modeles\Interfaces\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DossierMedicalService.cs" />
+    <Compile Include="Services\MedecinService.cs" />
+    <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\PatientService.cs" />
+    <Compile Include="Services\RendezVousService.cs" />
+    <Compile Include="Services\ResponsableService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{5e5f1a35-595c-417d-a818-2722850667e9}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modeles\Modeles.csproj">
+      <Project>{a88ec9fd-83d1-4184-a140-b51eec609ac5}</Project>
+      <Name>Modeles</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

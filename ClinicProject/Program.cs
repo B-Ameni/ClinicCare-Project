@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using DAL;
 namespace ClinicProject
 {
     internal static class Program
@@ -14,6 +14,7 @@ namespace ClinicProject
         [STAThread]
         static void Main()
         {
+            DatabaseInitializer.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

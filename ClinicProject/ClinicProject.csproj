@@ -32,6 +32,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,14 +66,80 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Admin\AjoutMedecin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Admin\AjoutMedecin.Designer.cs">
+      <DependentUpon>AjoutMedecin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\GestionUtilisateurs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\GestionUtilisateurs.Designer.cs">
+      <DependentUpon>GestionUtilisateurs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ListeDesMedecins.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ListeDesMedecins.Designer.cs">
+      <DependentUpon>ListeDesMedecins.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ListeDesPatients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ListeDesPatients.Designer.cs">
+      <DependentUpon>ListeDesPatients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ListeDesWorkers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ListeDesWorkers.Designer.cs">
+      <DependentUpon>ListeDesWorkers.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Admin\RDVDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\RDVDialog.Designer.cs">
+      <DependentUpon>RDVDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TableauDeBord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\TableauDeBord.Designer.cs">
+      <DependentUpon>TableauDeBord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsablePatient\MessagerieResp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResponsablePatient\MessagerieResp.Designer.cs">
+      <DependentUpon>MessagerieResp.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Admin\AjoutMedecin.resx">
+      <DependentUpon>AjoutMedecin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\GestionUtilisateurs.resx">
+      <DependentUpon>GestionUtilisateurs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ListeDesMedecins.resx">
+      <DependentUpon>ListeDesMedecins.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ListeDesPatients.resx">
+      <DependentUpon>ListeDesPatients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ListeDesWorkers.resx">
+      <DependentUpon>ListeDesWorkers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +149,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Admin\RDVDialog.resx">
+      <DependentUpon>RDVDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\TableauDeBord.resx">
+      <DependentUpon>TableauDeBord.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +167,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
+      <Project>{94bbf53e-a5a5-49e3-a25b-b3ee73571651}</Project>
+      <Name>ClassLibrary1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{5e5f1a35-595c-417d-a818-2722850667e9}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modeles\Modeles.csproj">
+      <Project>{a88ec9fd-83d1-4184-a140-b51eec609ac5}</Project>
+      <Name>Modeles</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
