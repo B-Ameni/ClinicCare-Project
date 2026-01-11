@@ -19,7 +19,7 @@ namespace ClinicProject
         private string type; // "Medecins" ou "Responsables"
         public IUser NouvelUtilisateur { get; private set; }
         public Medecin m { get; private set; }
-        public ClassLibrary1.Modeles.ResponsablePatient r { get; private set; }
+        public ResponsablePatient r { get; private set; }
 
         public AjoutMedecin(string type)
         {

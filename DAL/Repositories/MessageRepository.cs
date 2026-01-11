@@ -115,5 +115,58 @@ namespace DAL.Repositories
                 }
             }
         }
+        public List<Message> GetConversation(
+    int userId,
+    string userType,
+    int otherId,
+    string otherType)
+        {
+            var list = new List<Message>();
+
+            using (var conn = DbContext.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                SELECT * FROM Message
+                WHERE 
+                (
+                    ExpediteurId = @uId AND TypeExpediteur = @uType
+                    AND DestinataireId = @oId AND TypeDestinataire = @oType
+                )
+                OR
+                (
+                    ExpediteurId = @oId AND TypeExpediteur = @oType
+                    AND DestinataireId = @uId AND TypeDestinataire = @uType
+                )
+                ORDER BY DateEnvoi";
+
+                    cmd.Parameters.AddWithValue("@uId", userId);
+                    cmd.Parameters.AddWithValue("@uType", userType);
+                    cmd.Parameters.AddWithValue("@oId", otherId);
+                    cmd.Parameters.AddWithValue("@oType", otherType);
+
+                    using (var r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            list.Add(new Message
+                            {
+                                Id = r.GetInt32(0),
+                                ExpediteurId = r.GetInt32(1),
+                                TypeExpediteur = r.GetString(2),
+                                DestinataireId = r.GetInt32(3),
+                                TypeDestinataire = r.GetString(4),
+                                Contenu = r.GetString(5),
+                                DateEnvoi = DateTime.Parse(r.GetString(6))
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
     }
 }

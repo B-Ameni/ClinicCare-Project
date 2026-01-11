@@ -116,10 +116,10 @@
     <Compile Include="Admin\TableauDeBord.Designer.cs">
       <DependentUpon>TableauDeBord.cs</DependentUpon>
     </Compile>
-    <Compile Include="ResponsablePatient\MessagerieResp.cs">
+    <Compile Include="ResponsablePat\MessagerieResp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ResponsablePatient\MessagerieResp.Designer.cs">
+    <Compile Include="ResponsablePat\MessagerieResp.Designer.cs">
       <DependentUpon>MessagerieResp.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Admin\AjoutMedecin.resx">
@@ -154,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\TableauDeBord.resx">
       <DependentUpon>TableauDeBord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsablePat\MessagerieResp.resx">
+      <DependentUpon>MessagerieResp.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

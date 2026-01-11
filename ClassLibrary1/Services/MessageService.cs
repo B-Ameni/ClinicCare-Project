@@ -47,5 +47,14 @@ namespace ClassLibrary1.Services
 
             repo.Delete(id);
         }
+        public List<Message> GetConversation(
+    int userId,
+    string userType,
+    int otherId,
+    string otherType)
+        {
+            return repo.GetConversation(userId, userType, otherId, otherType);
+        }
+
     }
 }
