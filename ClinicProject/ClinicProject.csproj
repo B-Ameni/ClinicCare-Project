@@ -102,6 +102,96 @@
     <Compile Include="Admin\ListeDesWorkers.Designer.cs">
       <DependentUpon>ListeDesWorkers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Authentification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authentification.Designer.cs">
+      <DependentUpon>Authentification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedecinForm\AccueilMedecin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedecinForm\AccueilMedecin.Designer.cs">
+      <DependentUpon>AccueilMedecin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedecinForm\AjoutRDV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedecinForm\AjoutRDV.Designer.cs">
+      <DependentUpon>AjoutRDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedecinForm\CalendrierMedecin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedecinForm\CalendrierMedecin.Designer.cs">
+      <DependentUpon>CalendrierMedecin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedecinForm\DossierMedicalFormMedecin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedecinForm\DossierMedicalFormMedecin.Designer.cs">
+      <DependentUpon>DossierMedicalFormMedecin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedecinForm\ListePatientsMedecin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedecinForm\ListePatientsMedecin.Designer.cs">
+      <DependentUpon>ListePatientsMedecin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedecinForm\MessagerieMedecin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedecinForm\MessagerieMedecin.Designer.cs">
+      <DependentUpon>MessagerieMedecin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedecinForm\ProfilMedecin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedecinForm\ProfilMedecin.Designer.cs">
+      <DependentUpon>ProfilMedecin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm\AccueilPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientForm\AccueilPatient.Designer.cs">
+      <DependentUpon>AccueilPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm\AjoutRDVPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientForm\AjoutRDVPatient.Designer.cs">
+      <DependentUpon>AjoutRDVPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm\CreationCompte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientForm\CreationCompte.Designer.cs">
+      <DependentUpon>CreationCompte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm\DossierMedicalFormPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientForm\DossierMedicalFormPatient.Designer.cs">
+      <DependentUpon>DossierMedicalFormPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm\MessageriePatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientForm\MessageriePatient.Designer.cs">
+      <DependentUpon>MessageriePatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm\PriseRDV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientForm\PriseRDV.Designer.cs">
+      <DependentUpon>PriseRDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm\ProfilPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientForm\ProfilPatient.Designer.cs">
+      <DependentUpon>ProfilPatient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Admin\RDVDialog.cs">
@@ -115,6 +205,24 @@
     </Compile>
     <Compile Include="Admin\TableauDeBord.Designer.cs">
       <DependentUpon>TableauDeBord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsablePat\AccueilResponsable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResponsablePat\AccueilResponsable.Designer.cs">
+      <DependentUpon>AccueilResponsable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsablePat\DossierMedicalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResponsablePat\DossierMedicalForm.Designer.cs">
+      <DependentUpon>DossierMedicalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsablePat\ListePatients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResponsablePat\ListePatients.Designer.cs">
+      <DependentUpon>ListePatients.cs</DependentUpon>
     </Compile>
     <Compile Include="ResponsablePat\MessagerieResp.cs">
       <SubType>Form</SubType>
@@ -140,6 +248,51 @@
     <EmbeddedResource Include="Admin\ListeDesWorkers.resx">
       <DependentUpon>ListeDesWorkers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Authentification.resx">
+      <DependentUpon>Authentification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedecinForm\AccueilMedecin.resx">
+      <DependentUpon>AccueilMedecin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedecinForm\AjoutRDV.resx">
+      <DependentUpon>AjoutRDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedecinForm\CalendrierMedecin.resx">
+      <DependentUpon>CalendrierMedecin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedecinForm\DossierMedicalFormMedecin.resx">
+      <DependentUpon>DossierMedicalFormMedecin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedecinForm\ListePatientsMedecin.resx">
+      <DependentUpon>ListePatientsMedecin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedecinForm\MessagerieMedecin.resx">
+      <DependentUpon>MessagerieMedecin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedecinForm\ProfilMedecin.resx">
+      <DependentUpon>ProfilMedecin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientForm\AccueilPatient.resx">
+      <DependentUpon>AccueilPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientForm\AjoutRDVPatient.resx">
+      <DependentUpon>AjoutRDVPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientForm\CreationCompte.resx">
+      <DependentUpon>CreationCompte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientForm\DossierMedicalFormPatient.resx">
+      <DependentUpon>DossierMedicalFormPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientForm\MessageriePatient.resx">
+      <DependentUpon>MessageriePatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientForm\PriseRDV.resx">
+      <DependentUpon>PriseRDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientForm\ProfilPatient.resx">
+      <DependentUpon>ProfilPatient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -154,6 +307,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\TableauDeBord.resx">
       <DependentUpon>TableauDeBord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsablePat\AccueilResponsable.resx">
+      <DependentUpon>AccueilResponsable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsablePat\DossierMedicalForm.resx">
+      <DependentUpon>DossierMedicalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsablePat\ListePatients.resx">
+      <DependentUpon>ListePatients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResponsablePat\MessagerieResp.resx">
       <DependentUpon>MessagerieResp.cs</DependentUpon>
@@ -188,5 +350,6 @@
       <Name>Modeles</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

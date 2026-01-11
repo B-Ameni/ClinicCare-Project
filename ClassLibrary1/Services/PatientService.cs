@@ -2,6 +2,7 @@
 using DAL;
 using System;
 using System.Collections.Generic;
+using Modeles.Classes;
 
 namespace ClassLibrary1.Services
 {

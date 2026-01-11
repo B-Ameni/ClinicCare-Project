@@ -37,7 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "ListeDesWorkers";
             this.Text = "ListeDesWorkers";
-          //  this.Load += new System.EventHandler(this.ListeDesWorkers_Load);
+            this.Load += new System.EventHandler(this.ListeDesWorkers_Load);
             this.ResumeLayout(false);
 
         }

@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1.Modeles;
 using ClassLibrary1.Services;
+using Modeles.Classes;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -201,7 +202,7 @@ namespace ClinicProject
                 }
                 else
                 {
-                    var r = formAjout.NouvelUtilisateur as ClassLibrary1.Modeles.ResponsablePatient;
+                    var r = formAjout.NouvelUtilisateur as ResponsablePatient;
                     if (r != null) respService.Add(r);
                 }
 
@@ -245,6 +246,11 @@ namespace ClinicProject
                 r.Specialite = item.Specialite;
                 respService.Update(r);
             }
+        }
+
+        private void ListeDesWorkers_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

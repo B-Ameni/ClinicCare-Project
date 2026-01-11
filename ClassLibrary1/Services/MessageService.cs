@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Modeles.Classes;
+
 
 namespace ClassLibrary1.Services
 {

@@ -15,6 +15,7 @@ namespace DAL
             CreateRendezVousTable();
             CreateDossierMedicalTable();
             CreateMessageTable();
+            CreateDefaultAdminIfNotExists();
         }
 
         public static void CreatePatientTable()
@@ -170,5 +171,39 @@ namespace DAL
                 }
             }
         }
+        public static void CreateDefaultAdminIfNotExists()
+        {
+            using (var conn = DbContext.GetConnection())
+            {
+                conn.Open();
+
+                // Vérifier s'il existe déjà un admin
+                using (var checkCmd = conn.CreateCommand())
+                {
+                    checkCmd.CommandText = "SELECT COUNT(*) FROM Administrateur";
+                    long count = (long)checkCmd.ExecuteScalar();
+
+                    if (count > 0)
+                        return; // Admin existe déjà → on sort
+                }
+
+                // Insérer l'admin par défaut
+                using (var insertCmd = conn.CreateCommand())
+                {
+                    insertCmd.CommandText = @"
+                INSERT INTO Administrateur (Nom, Prenom, Email, MotDePasse)
+                VALUES (@nom, @prenom, @email, @mdp);
+            ";
+
+                    insertCmd.Parameters.AddWithValue("@nom", "admin");
+                    insertCmd.Parameters.AddWithValue("@prenom", "admin");
+                    insertCmd.Parameters.AddWithValue("@email", "admin");
+                    insertCmd.Parameters.AddWithValue("@mdp", "admin"); // à hasher plus tard
+
+                    insertCmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

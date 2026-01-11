@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Modeles.Classes;
 
 namespace ClinicProject
 {
     public partial class MessagerieResp: Form
     {
-        private readonly ClassLibrary1.Modeles.ResponsablePatient responsable;
+        private readonly ResponsablePatient responsable;
 
         private readonly MessageService messageService = new MessageService();
         private readonly PatientService patientService = new PatientService();
@@ -19,7 +20,7 @@ namespace ClinicProject
         private int selectedId;
         private string selectedType;
 
-        public MessagerieResp(ClassLibrary1.Modeles.ResponsablePatient responsableConnecte)
+        public MessagerieResp(ResponsablePatient responsableConnecte)
         {
             InitializeComponent();
             responsable = responsableConnecte;
@@ -116,7 +117,7 @@ namespace ClinicProject
             if (string.IsNullOrWhiteSpace(txtMessage.Text))
                 return;
 
-            var msg = new ClassLibrary1.Modeles.Message
+            var msg = new Modeles.Classes.Message
             {
                 ExpediteurId = responsable.Id,
                 TypeExpediteur = "Responsable",

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using ClassLibrary1.Modeles;
+using ClinicProject.Auth;
 using DAL;
+using Modeles.Classes;
 
 namespace ClinicProject
 {
@@ -32,8 +34,8 @@ namespace ClinicProject
             Application.SetCompatibleTextRenderingDefault(false);
 
             // 4️⃣ Lancement de la messagerie
-            Application.Run(new MessagerieResp(responsableTest));
-          // Application.Run(new Form1());
+           // Application.Run(new MessagerieResp(responsableTest));
+           Application.Run(new Authentification());
         }
     }
 }

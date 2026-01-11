@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using ClassLibrary1.Services;
+using Modeles.Classes;
+
 
 namespace ClinicProject
 {
@@ -65,7 +67,7 @@ namespace ClinicProject
             }
             else // Responsable
             {
-                r = new ClassLibrary1.Modeles.ResponsablePatient
+                r = new ResponsablePatient
                 {
                     Nom = nom,
                     Prenom = prenom,

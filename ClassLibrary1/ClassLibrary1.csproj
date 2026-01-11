@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdministrateurService.cs" />
     <Compile Include="Services\DossierMedicalService.cs" />
     <Compile Include="Services\MedecinService.cs" />
     <Compile Include="Services\MessageService.cs" />

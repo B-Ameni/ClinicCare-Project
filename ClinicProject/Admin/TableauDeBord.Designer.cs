@@ -37,7 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "TableauDeBord";
             this.Text = "TableauDeBord";
-            //this.Load += new System.EventHandler(this.TableauDeBord_Load);
+            this.Load += new System.EventHandler(this.TableauDeBord_Load);
             this.ResumeLayout(false);
 
         }

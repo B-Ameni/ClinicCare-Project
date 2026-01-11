@@ -1,4 +1,4 @@
-﻿using ClassLibrary1.Modeles;
+﻿using Modeles.Classes;
 using DAL.Repositories;
 using System;
 using System.Collections.Generic;

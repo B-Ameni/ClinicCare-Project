@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1.Modeles;
 using ClassLibrary1.Services;
+using Modeles.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -222,7 +223,7 @@ namespace ClinicProject
                 }
                 else
                 {
-                    var r = formAjout.NouvelUtilisateur as ClassLibrary1.Modeles.ResponsablePatient;
+                    var r = formAjout.NouvelUtilisateur as ResponsablePatient;
                     if (r != null)
                     {
                         respService.Add(r);

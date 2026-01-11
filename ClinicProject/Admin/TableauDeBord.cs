@@ -1,5 +1,4 @@
-﻿using ClassLibrary1.Modeles;
-using ClassLibrary1.Services;
+﻿using ClassLibrary1.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Modeles.Classes;
+
 
 namespace ClinicProject
 {
@@ -196,7 +197,7 @@ namespace ClinicProject
             if (dgv.SelectedRows.Count == 0) return;
 
             int index = dgv.SelectedRows[0].Index;
-            RendezVous rdv = rdvsDuJour[index];
+            Modeles.Classes.RendezVous rdv = rdvsDuJour[index];
 
             RDVDialog dialog = new RDVDialog(rdv);
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -215,6 +216,11 @@ namespace ClinicProject
 
             rdvService.Delete(rdv.Id);
             LoadRendezVous(calendar.SelectionStart);
+        }
+
+        private void TableauDeBord_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

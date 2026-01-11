@@ -2,6 +2,9 @@
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using Modeles.Classes;
+using Modeles.Classes;
+
 
 namespace DAL
 {
