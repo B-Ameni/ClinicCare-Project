@@ -1,0 +1,31 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+# Installer le SDK .NET
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '7.x.x'
+
+# Restaurer les packages NuGet
+- script: dotnet restore
+  displayName: 'Restore NuGet packages'
+
+# Compiler le projet
+- script: dotnet build --configuration Debug
+  displayName: 'Build project'
+
+# Lancer les tests xUnit
+- script: dotnet test ClinicProject.Tests/ClinicProject.Tests.csproj --configuration Debug --logger "trx;LogFileName=test-results.trx"
+  displayName: 'Run xUnit Tests'
+
+# Publier les résultats de tests
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '**/test-results.trx'
+    failTaskOnFailedTests: true
