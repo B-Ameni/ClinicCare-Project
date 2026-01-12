@@ -102,13 +102,13 @@
     <Compile Include="Repositories\ResponsablePatientRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Modeles\Modeles.csproj">
       <Project>{a88ec9fd-83d1-4184-a140-b51eec609ac5}</Project>
       <Name>Modeles</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

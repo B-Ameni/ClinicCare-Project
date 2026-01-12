@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
-    <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Modeles\Modeles.csproj" />
   </ItemGroup>
 
