@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using ClassLibrary1.Services;
 using Modeles.Classes;
@@ -10,7 +11,7 @@ namespace ClinicProject.MedecinForm
         private readonly int patientId;
         private readonly DossierMedicalService dossierService;
         private readonly PatientService patientService;
-        private Modeles.Classes.Patient patient;
+        private Patient patient;
         private DossierMedical currentDossier;
 
         public DossierMedicalFormMedecin(int patientId)
@@ -25,20 +26,24 @@ namespace ClinicProject.MedecinForm
             LoadPatientInfo();
         }
 
+        // ==========================
+        // Initialisation du ComboBox
+        // ==========================
         private void InitializeComboBox()
         {
-            // Remplir le combobox avec les types de fichiers possibles
             comboBox1.Items.Add("IRM");
             comboBox1.Items.Add("Analyse");
             comboBox1.Items.Add("Ordonnance");
             comboBox1.Items.Add("Scanner");
             comboBox1.Items.Add("Autre");
-            comboBox1.SelectedIndex = 0; // Sélection par défaut
+            comboBox1.SelectedIndex = 0;
         }
 
+        // ==========================
+        // Charger le dossier médical
+        // ==========================
         private void LoadDossier()
         {
-            // Chercher le dossier médical du patient
             currentDossier = dossierService.GetAll().Find(d => d.PatientId == patientId);
 
             if (currentDossier == null)
@@ -52,6 +57,9 @@ namespace ClinicProject.MedecinForm
             }
         }
 
+        // ==========================
+        // Charger les infos patient
+        // ==========================
         private void LoadPatientInfo()
         {
             patient = patientService.GetAll().Find(p => p.Id == patientId);
@@ -68,7 +76,7 @@ namespace ClinicProject.MedecinForm
         // ==========================
         // Ajouter un fichier
         // ==========================
-        private void buttonAjouterFichier_Click(object sender, EventArgs e)
+        private void buttonAjouterFichier_Click_1(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null)
             {
@@ -87,48 +95,110 @@ namespace ClinicProject.MedecinForm
                 {
                     string fichierSelectionne = openFile.FileName;
 
-                    // Enregistrer le chemin dans le dossier médical
-                    currentDossier.Fichiers = $"{typeFichier}: {fichierSelectionne}";
-                    dossierService.Update(currentDossier);
+                    AjouterFichierAuDossier(typeFichier, fichierSelectionne);
 
                     MessageBox.Show($"{typeFichier} ajouté !\nChemin : {fichierSelectionne}");
-
-                    // Ouvrir automatiquement le fichier sélectionné (optionnel)
-                    try
-                    {
-                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                        {
-                            FileName = fichierSelectionne,
-                            UseShellExecute = true
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Impossible d'ouvrir le fichier.\n" + ex.Message);
-                    }
                 }
             }
         }
 
-
-        private void buttonAnalyse_Click(object sender, EventArgs e)
+        // ==========================
+        // Ajouter fichier au dossier
+        // ==========================
+        private void AjouterFichierAuDossier(string typeFichier, string cheminFichier)
         {
-            MessageBox.Show("Analyse du patient...");
+            string nouveau = $"{typeFichier}:{cheminFichier};";
+
+            if (string.IsNullOrEmpty(currentDossier.Fichiers))
+                currentDossier.Fichiers = nouveau;
+            else
+                currentDossier.Fichiers += nouveau;
+
+            dossierService.Update(currentDossier);
+
+            // Recharger le dossier depuis la base
+            currentDossier = dossierService.GetAll().Find(d => d.PatientId == patientId);
         }
 
-        private void buttonConsultation_Click(object sender, EventArgs e)
+
+        // ==========================
+        // Récupérer fichiers par type
+        // ==========================
+        // ==========================
+        // Récupérer fichiers par type
+        // ==========================
+        private List<string> GetFichiersParType(string typeFichier)
         {
-            MessageBox.Show("Consultation du patient...");
+            var fichiers = new List<string>();
+
+            // Recharger le dossier depuis la base pour être sûr
+            currentDossier = dossierService.GetAll().Find(d => d.PatientId == patientId);
+            if (currentDossier == null || string.IsNullOrEmpty(currentDossier.Fichiers))
+                return fichiers;
+
+            // Split sur ';' pour chaque fichier
+            var items = currentDossier.Fichiers.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var item in items)
+            {
+                // Split simple sur ':'
+                var parts = item.Split(':');
+                if (parts.Length == 2 && parts[0].Equals(typeFichier, StringComparison.OrdinalIgnoreCase))
+                {
+                    fichiers.Add(parts[1]);
+                }
+            }
+
+            return fichiers;
         }
 
+
+        // ==========================
+        // Boutons pour afficher fichiers
+        // ==========================
+        private void buttonIRM_Click(object sender, EventArgs e)
+        {
+            AfficherFichiers("IRM");
+        }
+
+        private void buttonAnalyse_Click_1(object sender, EventArgs e)
+        {
+            AfficherFichiers("Analyse");
+        }
+
+        private void buttonScanner_Click(object sender, EventArgs e)
+        {
+            AfficherFichiers("Scanner");
+        }
+
+        private void buttonAutreFichier_Click(object sender, EventArgs e)
+        {
+            AfficherFichiers("Autre");
+        }
         private void buttonTraitement_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Traitement du patient...");
+            AfficherFichiers("Autre");
+        }
+
+            private void AfficherFichiers(string typeFichier)
+        {
+            var fichiers = GetFichiersParType(typeFichier);
+
+            if (fichiers.Count == 0)
+            {
+                MessageBox.Show($"Aucun fichier de type {typeFichier} enregistré.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string message = string.Join("\n", fichiers);
+            MessageBox.Show(message, $"Fichiers {typeFichier}", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void DossierMedicalFormMedecin_Load(object sender, EventArgs e)
         {
 
         }
+
+        
+        }
     }
-}

@@ -57,7 +57,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAutreFichier = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -191,6 +191,7 @@
             this.buttonAjouterFichier.TabIndex = 43;
             this.buttonAjouterFichier.Text = "Ajouter fichier";
             this.buttonAjouterFichier.UseVisualStyleBackColor = false;
+            this.buttonAjouterFichier.Click += new System.EventHandler(this.buttonAjouterFichier_Click_1);
             // 
             // label13
             // 
@@ -198,9 +199,9 @@
             this.label13.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(393, 18);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(324, 54);
+            this.label13.Size = new System.Drawing.Size(303, 54);
             this.label13.TabIndex = 42;
-            this.label13.Text = "Dossier Médicale";
+            this.label13.Text = "Dossier Médical";
             // 
             // label2
             // 
@@ -292,6 +293,7 @@
             this.buttonAnalyse.TabIndex = 56;
             this.buttonAnalyse.Text = "Analyse";
             this.buttonAnalyse.UseVisualStyleBackColor = false;
+            this.buttonAnalyse.Click += new System.EventHandler(this.buttonAnalyse_Click_1);
             // 
             // buttonIRM
             // 
@@ -303,6 +305,7 @@
             this.buttonIRM.TabIndex = 55;
             this.buttonIRM.Text = "IRM";
             this.buttonIRM.UseVisualStyleBackColor = false;
+            this.buttonIRM.Click += new System.EventHandler(this.buttonIRM_Click);
             // 
             // buttonTraitement
             // 
@@ -314,6 +317,7 @@
             this.buttonTraitement.TabIndex = 54;
             this.buttonTraitement.Text = "Traitement";
             this.buttonTraitement.UseVisualStyleBackColor = false;
+            this.buttonTraitement.Click += new System.EventHandler(this.buttonTraitement_Click);
             // 
             // buttonScanner
             // 
@@ -325,6 +329,7 @@
             this.buttonScanner.TabIndex = 52;
             this.buttonScanner.Text = "Scanner";
             this.buttonScanner.UseVisualStyleBackColor = false;
+            this.buttonScanner.Click += new System.EventHandler(this.buttonScanner_Click);
             // 
             // panel3
             // 
@@ -357,23 +362,24 @@
             this.comboBox1.Size = new System.Drawing.Size(334, 37);
             this.comboBox1.TabIndex = 57;
             // 
-            // button1
+            // buttonAutreFichier
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(904, 476);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 46);
-            this.button1.TabIndex = 58;
-            this.button1.Text = "Autre";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonAutreFichier.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonAutreFichier.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAutreFichier.Location = new System.Drawing.Point(904, 476);
+            this.buttonAutreFichier.Name = "buttonAutreFichier";
+            this.buttonAutreFichier.Size = new System.Drawing.Size(120, 46);
+            this.buttonAutreFichier.TabIndex = 58;
+            this.buttonAutreFichier.Text = "Autre";
+            this.buttonAutreFichier.UseVisualStyleBackColor = false;
+            this.buttonAutreFichier.Click += new System.EventHandler(this.buttonAutreFichier_Click);
             // 
             // DossierMedicalFormMedecin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 620);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonAutreFichier);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonAnalyse);
             this.Controls.Add(this.buttonIRM);
@@ -444,6 +450,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAutreFichier;
     }
 }

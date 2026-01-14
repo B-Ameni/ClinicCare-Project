@@ -94,13 +94,9 @@ namespace ClinicProject
             };
             btnAnnuler.Click += BtnAnnuler_Click;
 
-
-
-            // Ajouter tous les boutons au flow
             flow.Controls.Add(btnAjouter);
             flow.Controls.Add(btnModifier);
             flow.Controls.Add(btnAnnuler);
-
             panelBottom.Controls.Add(flow);
 
             // ---- AJOUT AU FORM ----
@@ -118,7 +114,7 @@ namespace ClinicProject
             {
                 Dock = DockStyle.Fill,
                 AutoGenerateColumns = false,
-                ReadOnly = true,
+                ReadOnly = false, // Pour pouvoir éditer le statut
                 AllowUserToAddRows = false,
                 AllowUserToDeleteRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -126,9 +122,28 @@ namespace ClinicProject
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             };
 
-            dgv.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Heure", DataPropertyName = "Heure" });
-            dgv.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Patient", DataPropertyName = "Patient" });
-            dgv.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Statut", DataPropertyName = "Statut" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Heure", DataPropertyName = "Heure", ReadOnly = true });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Patient", DataPropertyName = "Patient", ReadOnly = true });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Statut", DataPropertyName = "Statut", ReadOnly = true });
+
+            // Colonne pour changer le statut
+            var statutCol = new DataGridViewComboBoxColumn
+            {
+                HeaderText = "Changer statut",
+                Name = "StatutCombo",
+                FlatStyle = FlatStyle.Flat
+            };
+            statutCol.Items.Add("Terminé");
+            statutCol.Items.Add("Patient absent");
+            dgv.Columns.Add(statutCol);
+
+            // Événements pour la ComboBox
+            dgv.CellValueChanged += Dgv_CellValueChanged;
+            dgv.CurrentCellDirtyStateChanged += (s, e) =>
+            {
+                if (dgv.IsCurrentCellDirty)
+                    dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            };
         }
 
         // ==========================
@@ -145,21 +160,43 @@ namespace ClinicProject
                 .Where(r => r.MedecinId == medecin.Id)
                 .ToList();
 
-            dgv.DataSource = rdvsDuJour.Select(r => new
+            dgv.Rows.Clear();
+
+            foreach (var r in rdvsDuJour)
             {
-                Heure = r.DateHeure.ToString("HH:mm"),
-                Patient = rdvService.GetPatientName(r.PatientId),
-                Statut = r.Statut
-            }).ToList();
+                int rowIndex = dgv.Rows.Add(
+                    r.DateHeure.ToString("HH:mm"),
+                    rdvService.GetPatientName(r.PatientId),
+                    r.Statut,
+                    null
+                );
+
+                bool datePassee = r.DateHeure < DateTime.Now;
+                dgv.Rows[rowIndex].Cells["StatutCombo"].ReadOnly = !datePassee;
+
+                if (!datePassee)
+                    dgv.Rows[rowIndex].Cells["StatutCombo"].Style.BackColor = Color.LightGray;
+            }
         }
 
         private void BtnAjouter_Click(object sender, EventArgs e)
         {
             AjoutRDV dialog = new AjoutRDV(medecin.Id);
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                rdvService.Add(dialog.RDV);
-                LoadRendezVous(calendar.SelectionStart);
+                try
+                {
+                    rdvService.Add(dialog.RDV);
+                    LoadRendezVous(calendar.SelectionStart);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                                    "Conflit de rendez-vous",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -170,30 +207,67 @@ namespace ClinicProject
             int index = dgv.SelectedRows[0].Index;
             RendezVous rdv = rdvsDuJour[index];
 
-            // Utiliser AjoutRDV pour modifier
-            AjoutRDV dialog = new AjoutRDV(medecin.Id, rdv); // passe le rdv existant
+            AjoutRDV dialog = new AjoutRDV(medecin.Id, rdv);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                rdvService.Update(dialog.RDV); // prend la date+heure modifiée
-                LoadRendezVous(calendar.SelectionStart);
+                try
+                {
+                    rdvService.Update(dialog.RDV);
+                    LoadRendezVous(calendar.SelectionStart);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                                    "Erreur",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                }
             }
         }
-
 
         private void BtnAnnuler_Click(object sender, EventArgs e)
         {
             if (dgv.SelectedRows.Count == 0) return;
+
             int index = dgv.SelectedRows[0].Index;
             RendezVous rdv = rdvsDuJour[index];
 
-            rdvService.Delete(rdv.Id);
-            LoadRendezVous(calendar.SelectionStart);
+            // Confirmation avant suppression
+            var result = MessageBox.Show(
+                $"Voulez-vous vraiment annuler le rendez-vous avec {rdvService.GetPatientName(rdv.PatientId)} à {rdv.DateHeure:HH:mm} ?",
+                "Confirmer l'annulation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                rdvService.Delete(rdv.Id);
+                LoadRendezVous(calendar.SelectionStart);
+            }
         }
 
-
-        private void CalendrierMedecin_Load(object sender, EventArgs e)
+        private void Dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
 
+            if (dgv.Columns[e.ColumnIndex].Name != "StatutCombo") return;
+
+            var rdv = rdvsDuJour[e.RowIndex];
+            var newStatut = dgv.Rows[e.RowIndex].Cells["StatutCombo"].Value?.ToString();
+
+            if (string.IsNullOrEmpty(newStatut)) return;
+
+            if (rdv.DateHeure >= DateTime.Now)
+            {
+                MessageBox.Show("Impossible de modifier le statut avant la date du rendez-vous.");
+                LoadRendezVous(calendar.SelectionStart);
+                return;
+            }
+
+            rdv.Statut = newStatut;
+            rdvService.UpdateStatut(rdv.Id, newStatut);
+
+            LoadRendezVous(calendar.SelectionStart);
         }
     }
 }

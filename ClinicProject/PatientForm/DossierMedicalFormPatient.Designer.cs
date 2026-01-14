@@ -68,6 +68,7 @@
             this.buttonAnalyse.TabIndex = 70;
             this.buttonAnalyse.Text = "Analyse";
             this.buttonAnalyse.UseVisualStyleBackColor = false;
+            this.buttonAnalyse.Click += new System.EventHandler(this.buttonAnalyse_Click_1);
             // 
             // buttonTraitement
             // 

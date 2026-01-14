@@ -37,7 +37,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "CalendrierMedecin";
             this.Text = "Calendrier";
-            this.Load += new System.EventHandler(this.CalendrierMedecin_Load);
             this.ResumeLayout(false);
 
         }

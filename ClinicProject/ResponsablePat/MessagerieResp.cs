@@ -1,7 +1,6 @@
 ﻿using ClassLibrary1.Modeles;
 using ClassLibrary1.Services;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,13 +8,14 @@ using Modeles.Classes;
 
 namespace ClinicProject
 {
-    public partial class MessagerieResp: Form
+    public partial class MessagerieResp : Form
     {
         private readonly ResponsablePatient responsable;
 
         private readonly MessageService messageService = new MessageService();
         private readonly PatientService patientService = new PatientService();
         private readonly MedecinService medecinService = new MedecinService();
+        private readonly ResponsableService responsableService = new ResponsableService();
 
         private int selectedId;
         private string selectedType;
@@ -36,6 +36,7 @@ namespace ClinicProject
         {
             listBoxContacts.Items.Clear();
 
+            // Ajouter patients
             foreach (var p in patientService.GetAll())
             {
                 listBoxContacts.Items.Add(new ContactItem
@@ -46,6 +47,7 @@ namespace ClinicProject
                 });
             }
 
+            // Ajouter médecins
             foreach (var m in medecinService.GetAll())
             {
                 listBoxContacts.Items.Add(new ContactItem
@@ -55,10 +57,21 @@ namespace ClinicProject
                     Nom = "Dr " + m.Nom + " " + m.Prenom
                 });
             }
+
+            // Ajouter responsables (sauf soi-même)
+            foreach (var r in responsableService.GetAll().Where(rp => rp.Id != responsable.Id))
+            {
+                listBoxContacts.Items.Add(new ContactItem
+                {
+                    Id = r.Id,
+                    Type = "Responsable",
+                    Nom = r.Nom + " " + r.Prenom
+                });
+            }
         }
 
         // ===================== SELECTION CONTACT =====================
-        private void listBoxContacts_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void listBoxContacts_SelectedIndexChanged(object sender, EventArgs e)
         {
             var contact = listBoxContacts.SelectedItem as ContactItem;
             if (contact == null) return;
@@ -73,7 +86,7 @@ namespace ClinicProject
         // ===================== CONVERSATION =====================
         private void LoadConversation()
         {
-            listBoxMessages.Clear(); // Efface tout le contenu
+            listBoxMessages.Clear();
 
             var messages = messageService.GetConversation(
                 responsable.Id,
@@ -84,29 +97,25 @@ namespace ClinicProject
 
             foreach (var m in messages)
             {
-                bool isMe = m.ExpediteurId == responsable.Id &&
-                            m.TypeExpediteur == "Responsable";
-
+                bool isMe = m.ExpediteurId == responsable.Id && m.TypeExpediteur == "Responsable";
                 string prefix = isMe ? "Moi" : "Lui";
 
                 listBoxMessages.SelectionStart = listBoxMessages.TextLength;
                 listBoxMessages.SelectionLength = 0;
 
-                // Couleur différente si c'est moi ou l'autre
                 listBoxMessages.SelectionColor = isMe ? Color.Blue : Color.DarkGreen;
                 listBoxMessages.AppendText($"{prefix} [{m.DateEnvoi:dd/MM HH:mm}] : ");
-                    
+
                 listBoxMessages.SelectionColor = Color.Black;
                 listBoxMessages.AppendText(m.Contenu + "\n\n");
             }
 
-            // Scroll automatique en bas
             listBoxMessages.SelectionStart = listBoxMessages.TextLength;
             listBoxMessages.ScrollToCaret();
         }
 
         // ===================== ENVOI MESSAGE =====================
-        private void btnEnvoyer_Click_1(object sender, EventArgs e)
+        private void btnEnvoyer_Click(object sender, EventArgs e)
         {
             if (selectedId == 0)
             {
@@ -123,17 +132,13 @@ namespace ClinicProject
                 TypeExpediteur = "Responsable",
                 DestinataireId = selectedId,
                 TypeDestinataire = selectedType,
-                Contenu = txtMessage.Text
+                Contenu = txtMessage.Text,
+                DateEnvoi = DateTime.Now
             };
 
             messageService.Add(msg);
             txtMessage.Clear();
             LoadConversation();
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 
@@ -144,9 +149,6 @@ namespace ClinicProject
         public string Type { get; set; }
         public string Nom { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Nom} ({Type})";
-        }
+        public override string ToString() => $"{Nom} ({Type})";
     }
 }

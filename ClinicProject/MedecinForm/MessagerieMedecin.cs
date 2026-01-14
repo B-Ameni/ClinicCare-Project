@@ -16,6 +16,7 @@ namespace ClinicProject.MedecinForm
         private readonly MessageService messageService = new MessageService();
         private readonly PatientService patientService = new PatientService();
         private readonly MedecinService medecinService = new MedecinService();
+        private readonly ResponsableService responsableService = new ResponsableService();
 
         private int selectedId;
         private string selectedType;
@@ -45,9 +46,21 @@ namespace ClinicProject.MedecinForm
                     Nom = p.Nom + " " + p.Prenom
                 });
             }
+            foreach (var r in responsableService.GetAll())
+            {
+                listBoxContacts.Items.Add(new ContactItem
+                {
+                    Id = r.Id,
+                    Type = "Responsable",
+                    Nom = r.Nom + " " + r.Prenom
+                });
+            }
 
             foreach (var m in medecinService.GetAll())
             {
+                if (m.Id == med.Id)
+                    continue; // ❌ ne pas s'afficher soi-même
+
                 listBoxContacts.Items.Add(new ContactItem
                 {
                     Id = m.Id,
@@ -55,6 +68,8 @@ namespace ClinicProject.MedecinForm
                     Nom = "Dr " + m.Nom + " " + m.Prenom
                 });
             }
+
+
         }
 
         // ===================== SELECTION CONTACT =====================
@@ -77,7 +92,7 @@ namespace ClinicProject.MedecinForm
 
             var messages = messageService.GetConversation(
                 med.Id,
-                "Responsable",
+                "Medecin",
                 selectedId,
                 selectedType
             );
@@ -85,7 +100,7 @@ namespace ClinicProject.MedecinForm
             foreach (var m in messages)
             {
                 bool isMe = m.ExpediteurId == med.Id &&
-                            m.TypeExpediteur == "Responsable";
+                            m.TypeExpediteur == "Medecin";
 
                 string prefix = isMe ? "Moi" : "Lui";
 
@@ -120,7 +135,7 @@ namespace ClinicProject.MedecinForm
             var msg = new Modeles.Classes.Message
             {
                 ExpediteurId = med.Id,
-                TypeExpediteur = "Responsable",
+                TypeExpediteur = "Medecin",
                 DestinataireId = selectedId,
                 TypeDestinataire = selectedType,
                 Contenu = txtMessage.Text

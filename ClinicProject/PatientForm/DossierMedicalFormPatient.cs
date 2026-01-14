@@ -76,5 +76,10 @@ namespace ClinicProject.PatientForm
         {
 
         }
+
+        private void buttonAnalyse_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

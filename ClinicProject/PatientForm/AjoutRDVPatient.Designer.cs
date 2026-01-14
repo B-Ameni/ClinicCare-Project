@@ -33,9 +33,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtMedecinNom = new System.Windows.Forms.TextBox();
             this.labelprenom = new System.Windows.Forms.Label();
             this.labelnom = new System.Windows.Forms.Label();
+            this.cmbListePatients = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,13 +43,14 @@
             // 
             this.dtpDateHeure.CalendarMonthBackground = System.Drawing.SystemColors.GradientInactiveCaption;
             this.dtpDateHeure.CustomFormat = "\"dd/MM/yyyy HH:mm\"";
+            this.dtpDateHeure.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.dtpDateHeure.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDateHeure.Location = new System.Drawing.Point(299, 200);
             this.dtpDateHeure.MaxDate = new System.DateTime(2029, 12, 25, 23, 59, 59, 0);
             this.dtpDateHeure.MinDate = new System.DateTime(2026, 1, 1, 0, 0, 0, 0);
             this.dtpDateHeure.Name = "dtpDateHeure";
             this.dtpDateHeure.ShowUpDown = true;
-            this.dtpDateHeure.Size = new System.Drawing.Size(208, 22);
+            this.dtpDateHeure.Size = new System.Drawing.Size(208, 30);
             this.dtpDateHeure.TabIndex = 43;
             this.dtpDateHeure.Value = new System.DateTime(2026, 12, 31, 0, 0, 0, 0);
             // 
@@ -100,15 +101,6 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Ajouter un RDV";
             // 
-            // txtMedecinNom
-            // 
-            this.txtMedecinNom.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtMedecinNom.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.txtMedecinNom.Location = new System.Drawing.Point(299, 254);
-            this.txtMedecinNom.Name = "txtMedecinNom";
-            this.txtMedecinNom.Size = new System.Drawing.Size(208, 36);
-            this.txtMedecinNom.TabIndex = 40;
-            // 
             // labelprenom
             // 
             this.labelprenom.AutoSize = true;
@@ -129,16 +121,26 @@
             this.labelnom.TabIndex = 38;
             this.labelnom.Text = "DateHeure : ";
             // 
+            // cmbListePatients
+            // 
+            this.cmbListePatients.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.cmbListePatients.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbListePatients.FormattingEnabled = true;
+            this.cmbListePatients.Location = new System.Drawing.Point(299, 258);
+            this.cmbListePatients.Name = "cmbListePatients";
+            this.cmbListePatients.Size = new System.Drawing.Size(208, 33);
+            this.cmbListePatients.TabIndex = 44;
+            // 
             // AjoutRDVPatientt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cmbListePatients);
             this.Controls.Add(this.dtpDateHeure);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.txtMedecinNom);
             this.Controls.Add(this.labelprenom);
             this.Controls.Add(this.labelnom);
             this.Name = "AjoutRDVPatientt";
@@ -157,8 +159,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtMedecinNom;
         private System.Windows.Forms.Label labelprenom;
         private System.Windows.Forms.Label labelnom;
+        private System.Windows.Forms.ComboBox cmbListePatients;
     }
 }

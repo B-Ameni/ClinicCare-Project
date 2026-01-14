@@ -37,7 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "PriseRDV";
             this.Text = "PriseRDV";
-            this.Load += new System.EventHandler(this.PriseRDV_Load);
+
             this.ResumeLayout(false);
 
         }

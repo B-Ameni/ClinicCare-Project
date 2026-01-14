@@ -49,7 +49,6 @@
             this.listBoxContacts.Name = "listBoxContacts";
             this.listBoxContacts.Size = new System.Drawing.Size(278, 324);
             this.listBoxContacts.TabIndex = 0;
-            this.listBoxContacts.SelectedIndexChanged += new System.EventHandler(this.listBoxContacts_SelectedIndexChanged_1);
             // 
             // lblConversation
             // 
@@ -72,7 +71,6 @@
             this.btnEnvoyer.TabIndex = 3;
             this.btnEnvoyer.Text = "Envoyer";
             this.btnEnvoyer.UseVisualStyleBackColor = false;
-            this.btnEnvoyer.Click += new System.EventHandler(this.btnEnvoyer_Click_1);
             // 
             // txtMessage
             // 
@@ -140,7 +138,6 @@
             this.listBoxMessages.Size = new System.Drawing.Size(307, 324);
             this.listBoxMessages.TabIndex = 19;
             this.listBoxMessages.Text = "";
-            this.listBoxMessages.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // MessagerieResp
             // 
